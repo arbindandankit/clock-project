@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>JS clock</title>
+	<style>
+		::selection{
+            background-color: orange;
+            color: aqua;
+        }
+
+		body{
+			background-color: aqua;
+		}
+        
+		.clock{
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			height: 300px;
+			width: 300px;
+			background: coral;
+			border-radius: 150px;
+		}
+
+		h1{
+			position: absolute;
+			top: 20%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+			color: lightgreen;
+			font-size: 4em;
+			font-family: Arial, sans-serif;
+		}
+
+		h2{
+			position: absolute;
+			top: 60%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			text-align: center;
+			color: lightgreen;
+			font-size: 1.5em;
+			font-family: Arial, sans-serif;
+		}
+
+        .clock-2{
+            height: 300px;
+            width: 300px;
+            border: 5px solid blue;
+            border-radius: 50%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .center{
+            height: 15px;
+            width: 15px;
+            background: blue;
+            border-radius: 50%;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .sec-hand{
+            height: 120px;
+            width: 5px;
+            background: grey;
+            border-radius: 20px;
+            transform-origin: bottom;
+            position: relative;
+            top: 33px;
+            left: 146px;
+			opacity: 0.7;
+        }
+
+        .min-hand{
+            height: 120px;
+            width: 10px;
+            background: grey;
+            border-radius: 20px;
+            transform-origin: bottom;
+            position: relative;
+            top: -83px;
+            left: 145px;
+			opacity: 0.7;
+        }
+
+        .hour-hand{
+            height: 90px;
+            width: 15px;
+            background: grey;
+            border-radius: 20px;
+            transform-origin: bottom;
+            position: relative;
+            top: -177px;
+            left: 142px;
+			opacity: 0.7;
+        }
+
+        .center{
+            height: 30px;
+            width: 30px;
+            background-color: blue;
+            border-radius: 50%;
+        }
+	</style>
+</head>
+<body>
+	<div class="clock">
+		<h1><span class="one"></span>:<span class="two"></span>:<span class="three"></span></h1>
+		<h2><span class="four"></span>, <span class="five"></span> <span class="six"></span></h2>
+	</div>
+	<div class="clock-2">
+        <div class="sec-hand"></div>
+        <div class="min-hand"></div>
+        <div class="hour-hand"></div>
+        <div class="center"></div>
+    </div>
+	<script>
+		const audio = new Audio()
+		audio.src = "./wall-clock-sounds-sfx-176674.mp3"
+		setInterval(() => {
+			audio.play()
+		}, 5000);
+		setInterval(function(){
+			let d = new Date()
+			document.querySelector(".one").innerHTML = d.getHours()
+			document.querySelector(".two").innerHTML = d.getMinutes()
+			document.querySelector(".three").innerHTML = d.getSeconds()
+			document.querySelector(".four").innerHTML = d.getDay()
+			if(d.getDay() == 0){
+				document.querySelector(".four").innerHTML = "Sunday"
+			}else if(d.getDay() == 1){
+				document.querySelector(".four").innerHTML = "Monday"
+			}else if(d.getDay() == 2){
+				document.querySelector(".four").innerHTML = "Tuesday"
+			}else if(d.getDay() == 3){
+				document.querySelector(".four").innerHTML = "Wednesday"
+			}else if(d.getDay() == 4){
+				document.querySelector(".four").innerHTML = "Thursday"
+			}else if(d.getDay() == 5){
+				document.querySelector(".four").innerHTML = "Friday"
+			}else{
+				document.querySelector(".four").innerHTML = "Saturday"
+			}
+			document.querySelector(".five").innerHTML = d.getMonth()
+			if(d.getMonth() == 0){
+				document.querySelector(".five").innerHTML = "January"
+			}else if(d.getMonth() == 1){
+				document.querySelector(".five").innerHTML = "February"
+			}else if(d.getMonth() == 2){
+				document.querySelector(".five").innerHTML = "March"
+			}else if(d.getMonth() == 3){
+				document.querySelector(".five").innerHTML = "April"
+			}else if(d.getMonth() == 4){
+				document.querySelector(".five").innerHTML = "May"
+			}else if(d.getMonth() == 5){
+				document.querySelector(".five").innerHTML = "June"
+			}else if(d.getMonth() == 6){
+				document.querySelector(".five").innerHTML = "July"
+			}else if(d.getMonth() == 7){
+				document.querySelector(".five").innerHTML = "August"
+			}else if(d.getMonth() == 8){
+				document.querySelector(".five").innerHTML = "September"
+			}else if(d.getMonth() == 9){
+				document.querySelector(".five").innerHTML = "October"
+			}else if(d.getMonth() == 10){
+				document.querySelector(".five").innerHTML = "November"
+			}else{
+				document.querySelector(".five").innerHTML = "December"
+			}
+			document.querySelector(".six").innerHTML = d.getFullYear()
+	    }
+		, 1)
+	</script>
+	<script>
+        setInterval(() => {
+            let d = new Date()
+            let sec = d.getSeconds()
+            let min = d.getMinutes()
+            let hour = d.getHours()
+            let rot1 = sec * 6
+            let rot2 = min * 6
+            let rot3 = hour * 30
+            document.querySelector(".sec-hand").style.rotate = `${rot1}deg`
+            document.querySelector(".min-hand").style.rotate = `${rot2}deg`
+            document.querySelector(".hour-hand").style.rotate = `${rot3}deg`
+        }, 1000)
+    </script>
+</body>
+</html>
